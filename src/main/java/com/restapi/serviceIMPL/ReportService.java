@@ -21,7 +21,7 @@ public class ReportService {
     @Autowired
     private UserRepository repository;
 
-    public String exportReport(String reportFormat) throws FileNotFoundException, JRException{
+    public String exportUserReport(String reportFormat) throws FileNotFoundException, JRException{
 
         String path = "D:\\IJSE\\CMJD\\Courseworks\\Final CW";
         List<User> users = repository.findAll();
@@ -42,5 +42,10 @@ public class ReportService {
         }
 
         return "report generated in path: " + path;
+    }
+
+    public String exportProductReport(String reportFormat) throws FileNotFoundException, JRException {
+
+        return null;
     }
 }

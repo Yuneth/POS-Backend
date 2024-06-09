@@ -65,9 +65,17 @@ public class AdminController {
 
 	//**************** Report Services *****************//
 
-	@GetMapping("/report/{format}")
-	public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
-		return reportService.exportReport(format);
+	@GetMapping("report/{type}/{format}")
+	public ResponseEntity<String> generateReport(@PathVariable String type, @PathVariable String format) throws FileNotFoundException, JRException {
+		String reportPath;
+		if (type.equalsIgnoreCase("users")) {
+			reportPath = reportService.exportUserReport(format);
+		} else if (type.equalsIgnoreCase("products")) {
+			reportPath = reportService.exportProductReport(format);
+		} else {
+			throw new IllegalArgumentException("Invalid report type");
+		}
+		return ResponseEntity.ok("Report generated at: " + reportPath);
 	}
 	
 	
