@@ -85,6 +85,12 @@
 		</dependency>
 		<!-- JAXB RI, Jakarta XML Binding -->
 
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.5.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

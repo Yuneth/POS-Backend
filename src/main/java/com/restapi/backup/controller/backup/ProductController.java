@@ -34,7 +34,7 @@ import com.restapi.utility.FileUpload;
 
 
 
-@RestController
+@RestController("backupProductController")
 @RequestMapping("api/v1/kjkjkj")
 @CrossOrigin(originPatterns = "*")
 public class ProductController {

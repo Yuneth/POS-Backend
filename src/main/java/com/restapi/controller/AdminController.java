@@ -1,10 +1,13 @@
 package com.restapi.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.restapi.serviceIMPL.ReportService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,12 +46,10 @@ import com.restapi.utility.FileUpload;
 public class AdminController {
 	@Autowired
 	private ProductServiceImple productService;
-	
 
 	@Autowired
 	private CategoryServiceImpl categoryServiceImpl;
-	
-	
+
 	@Autowired
 	private OrderService orderService;
 	
@@ -57,7 +58,17 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private ReportService reportService;
+
+
+	//**************** Report Services *****************//
+
+	@GetMapping("/report/{format}")
+	public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
+		return reportService.exportReport(format);
+	}
 	
 	
 	
@@ -238,7 +249,12 @@ public class AdminController {
 		
 		
 		//**********         USER SERVICES      ********************//
-		
+
+		@GetMapping("/users")
+		public List <User> getAllUsers(){
+		return userService.getAllUsers();
+		}
+
 	    @GetMapping("getuserbyid/{id}")
 	    public ResponseEntity<Object> getUserById(@PathVariable("id") Long userId)
 	    {
